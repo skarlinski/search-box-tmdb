@@ -4,9 +4,10 @@ import './ActorsPage.css'
 
 class ActorsPage extends React.Component{
     render(){
+        const resultArray = ['Me','myself','I']
         return (
             <div className="c-actors-page">
-                <LiveSearchBox placeholderText="Search for Actor"/>
+                <LiveSearchBox placeholderText="Search for Actor" results={resultArray}/>
             </div>
         )
     }

@@ -1,5 +1,5 @@
 import React from 'react'; // Every file that uses React.Component needs to import this
-import { Form } from 'react-bootstrap';
+import { Form, ListGroup } from 'react-bootstrap';
 import './LiveSearchBox.css';
 
 // This component is a GENERIC search box that shows results immediatly when the
@@ -29,10 +29,15 @@ class LiveSearchBox extends React.Component{
         // Extract variables from an object
         const {placeholderText} = this.props;
         //const {searchText} = this.state;
-
+        const resultsElements = this.props.results.map((item, index) => {
+            return <ListGroup.Item key={index}>{item}</ListGroup.Item>
+        })
         return (
             <div className="c-live-search-box">
                <Form.Control type="search" placeholder={placeholderText} />
+                <ListGroup>
+                    {resultsElements}
+                </ListGroup>
             </div>
         )
     }
