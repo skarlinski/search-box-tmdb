@@ -22,6 +22,13 @@ class LiveSearchBox extends React.Component{
             searchText: ''
         }
     }
+    handleInputChange = (event) => {
+        // this will get the value of the input, and will update the state
+        this.setState({
+            searchText: event.target.value
+        });
+        this.props.searchTextChanged(event.target.value);
+    }
     render(){
 
         // const placeholder = this.props.placeholder
@@ -34,10 +41,11 @@ class LiveSearchBox extends React.Component{
         })
         return (
             <div className="c-live-search-box">
-               <Form.Control type="search" placeholder={placeholderText} />
-                <ListGroup>
+               <Form.Control type="search" onChange={this.handleInputChange} placeholder={placeholderText} value={this.state.searchText}/>
+                <ListGroup className="search-results">
                     {resultsElements}
                 </ListGroup>
+                <p>This should be hidden</p>
             </div>
         )
     }
