@@ -29,6 +29,19 @@ class LiveSearchBox extends React.Component{
         });
         this.props.searchTextChanged(event.target.value);
     }
+    handleClick = (index) => {
+        // Passing a function as a prop - "doar rashum" - 'לשלוח וו'
+        // 1. Implement the event handler in the child component // handleClick
+        // 2. Implement the handler in the parent component // addActor
+        // 3. Pass the parent handler to the child as a prop // <LiveSearchBox resultSelected = {this.addActor} />
+        // 4. Invoke the function passed as prop from the child // resultSelected(index) from LiveSearchBox
+
+        // We will get the index and invoke resultSelected from the props
+        this.props.resultSelected(index);
+        this.setState({
+            searchText: ''
+        })
+    }
     render(){
 
         // const placeholder = this.props.placeholder
@@ -37,15 +50,21 @@ class LiveSearchBox extends React.Component{
         const {placeholderText} = this.props;
         //const {searchText} = this.state;
         const resultsElements = this.props.results.map((item, index) => {
-            return <ListGroup.Item key={index}>{item}</ListGroup.Item>
+            return <ListGroup.Item 
+            onClick={() => {this.handleClick(index)}}
+            key={index}>
+                {item}
+            </ListGroup.Item>
         })
         return (
             <div className="c-live-search-box">
-               <Form.Control type="search" onChange={this.handleInputChange} placeholder={placeholderText} value={this.state.searchText}/>
+               <Form.Control type="search" 
+               onChange={this.handleInputChange}
+                placeholder={placeholderText}
+                value={this.state.searchText}/>
                 <ListGroup className="search-results">
                     {resultsElements}
                 </ListGroup>
-                <p>This should be hidden</p>
             </div>
         )
     }
